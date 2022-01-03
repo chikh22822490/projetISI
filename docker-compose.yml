@@ -1,0 +1,39 @@
+version: '1'
+
+services:
+  app:
+    image: data-display
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - 5555:5555
+    container_name: data-display
+    networks:
+      - bis_network
+
+  nginx:
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - 9500:80
+      - 9501:443
+    container_name: nginx-data
+    networks:
+      - bis_network
+
+  nginx2:
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+      - 9503:80
+      - 9504:443
+    container_name: nginx-data2
+    networks:
+      - bis_network
+networks:
+  bis_network:
+    driver: bridge
+    external: true

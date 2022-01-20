@@ -1,0 +1,41 @@
+version: '1'
+
+services:
+
+  jenkins:
+
+    image: 'jenkins/jenkins:lts'
+
+    container_name: "jenkins"
+
+    ports:
+
+      - '8080:8080'
+
+      - '8443:443'
+
+      - '50000:50000'
+
+    volumes:
+
+      - D:/3BIS/Integ SI/projet/data/jenkins_data:/jenkins_home
+
+      - D:/3BIS/Integ SI/projet/data/jenkins:/var/jenkins_config
+
+    networks:
+      - bis_network
+    
+networks:
+  default:
+    external:
+      name: bis_network
+
+volumes:
+
+  jenkins_data:
+
+    driver: local
+
+  jenkins:
+
+    driver: local
